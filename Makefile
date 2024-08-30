@@ -1,24 +1,34 @@
-check:
-	golangci-lint run
+make: linux darwin windows
 
-check-clean-cache:
-	golangci-lint cache clean
+#
+# ALL SUPPORT
+#
 
-protoc-setup:
-	wget -P meshes https://raw.githubusercontent.com/meshplay/meshplay/master/server/meshes/meshops.proto
+darwin: darwin-arm
+	nexe index.js -t darwin-x64 -o kubeopenapi-jsonschema-darwin -r "./node_modules/**/*"
 
-proto:
-	protoc -I meshes/ meshes/meshops.proto --go_out=plugins=grpc:./meshes/
+linux: linux-arm
+	nexe index.js -t linux-x64 -o kubeopenapi-jsonschema -r "./node_modules/**/*"
 
+windows: windows-arm
+	nexe index.js -t windows-x64 -o kubeopenapi-jsonschema -r "./node_modules/**/*"
 
+alpine: alpine-arm
+	nexe index.js -t alpine-x64 -o kubeopenapi-jsonschema -r "./node_modules/**/*"
 
+#
+# ARM SUPPORT
+#
+darwin-arm:
+	nexe index.js -t arm64 --build -o kubeopenapi-jsonschema-darwin -r "./node_modules/**/*"
 
+linux-arm:
+	nexe index.js -t arm64 --build -o kubeopenapi-jsonschema -r "./node_modules/**/*"
 
-site:
-	$(jekyll) serve --drafts --livereload
+windows-arm:
+	nexe index.js -t windows-arm64 --build -o kubeopenapi-jsonschema -r "./node_modules/**/*"
 
-build:
-	$(jekyll) build --drafts
+alpine-arm:
+	nexe index.js -t alpine-arm64 --build -o kubeopenapi-jsonschema -r "./node_modules/**/*"
 
-docker:
-	docker run --name site -d --rm -p 4000:4000 -v `pwd`:"/srv/jekyll" jekyll/jekyll:4.0.0 bash -c "bundle install; jekyll serve --drafts --livereload"
+.PHONY: darwin darwin-arm alpine alpine-arm linux linux-arm
