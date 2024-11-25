@@ -27,4 +27,4 @@ jobs:
           npm install -g nexe
 
       - name: Build artifacts
-        run: make
+        run: make all
