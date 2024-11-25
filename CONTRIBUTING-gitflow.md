@@ -10,7 +10,7 @@ While this isn't an absolutely necessary step, if you plan on doing anything mor
 
 ## Add 'upstream' repo to list of remotes
 ```
-git remote add upstream https://github.com/khulnasoft/meshplay.git
+git remote add upstream https://github.com/khulnsoft/meshplay.git
 ``` 
 ("meshplay" is used as the example repo. Be sure to reference the _actual_ repo you're contributing to e.g. "meshplay-linkerd").
 
