@@ -5,22 +5,27 @@ on:
 
 jobs:
   build_and_release:
-    name: Build and release
+    name: Build and Release
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: 12.9.1
+          node-version: '16' # Update to a more stable and supported version
           cache: 'npm'
-      - name: Setup dependencies
+
+      - name: Install dependencies
         run: |
           npm ci
-          npm i -g nexe
+          npm install -g nexe
+
       - name: Build artifacts
         run: make
+
       - name: Release artifacts
         uses: ncipollo/release-action@v1
         with:
