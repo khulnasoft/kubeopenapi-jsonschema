@@ -9,7 +9,7 @@ alpine: alpine-x64 alpine-arm
 # Specific Platform and Architecture Targets
 
 darwin-x64:
-	nexe index.js -t darwin-x64 -o kubeopenapi-jsonschema-darwin-x64 -r "./node_modules/**/*"
+	nexe index.js -t darwin-x64 --build -o kubeopenapi-jsonschema-darwin-x64 -r "./node_modules/**/*"
 
 darwin-arm:
 	nexe index.js -t arm64 --build -o kubeopenapi-jsonschema-darwin-arm -r "./node_modules/**/*"
